@@ -12,14 +12,7 @@ const prisma = new PrismaClient()
 app.register(cors)
 
 app.get('/', () => {
-  const habits = prisma.habit.findMany({
-    where:
-    {
-      title: {
-        startsWith: "Beber"
-      }
-    }
-  })
+  const habits = prisma.habit.findMany()
 
   return habits
 })
