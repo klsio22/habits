@@ -16,12 +16,22 @@ async function run() {
   await prisma.habit.deleteMany()
   await prisma.day.deleteMany()
 
+  /**
+   * Create habits
+   */
   await Promise.all([
     prisma.habit.create({
       data: {
         id: firstHabitId,
-        title: 'Correr 10km',
+        title: 'Beber 2L água',
         created_at: firstHabitCreationDate,
+        weekDays: {
+          create: [
+            { week_day: 1 },
+            { week_day: 2 },
+            { week_day: 3 },
+          ]
+        }
       }
     }),
 
@@ -30,7 +40,13 @@ async function run() {
         id: secondHabitId,
         title: 'Exercitar',
         created_at: secondHabitCreationDate,
-
+        weekDays: {
+          create: [
+            { week_day: 3 },
+            { week_day: 4 },
+            { week_day: 5 },
+          ]
+        }
       }
     }),
 
@@ -39,8 +55,65 @@ async function run() {
         id: thirdHabitId,
         title: 'Dormir 8h',
         created_at: thirdHabitCreationDate,
+        weekDays: {
+          create: [
+            { week_day: 1 },
+            { week_day: 2 },
+            { week_day: 3 },
+            { week_day: 4 },
+            { week_day: 5 },
+          ]
+        }
       }
     })
+  ])
+
+  await Promise.all([
+    /**
+     * Habits (Complete/Available): 1/1
+     */
+    prisma.day.create({
+      data: {
+        /** Monday */
+        date: new Date('2023-01-02T03:00:00.000z'),
+        dayHabits: {
+          create: {
+            habit_id: firstHabitId,
+          }
+        }
+      }
+    }),
+
+    /**
+     * Habits (Complete/Available): 1/1
+     */
+    prisma.day.create({
+      data: {
+        /** Friday */
+        date: new Date('2023-01-06T03:00:00.000z'),
+        dayHabits: {
+          create: {
+            habit_id: firstHabitId,
+          }
+        }
+      }
+    }),
+
+    /**
+     * Habits (Complete/Available): 2/2
+     */
+    prisma.day.create({
+      data: {
+        /** Wednesday */
+        date: new Date('2023-01-04T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: firstHabitId },
+            { habit_id: secondHabitId },
+          ]
+        }
+      }
+    }),
   ])
 
 }
