@@ -11,11 +11,6 @@ const app = Fastify()
 app.register(cors)
 app.register(appRoutes)
 
-/* app.get('/', () => {
-  const habits = prisma.habit.findMany()
-  return habits
-}) */
-
 app.listen({
   port: 3333
 }).then(() => {
