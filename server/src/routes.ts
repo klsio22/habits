@@ -54,7 +54,22 @@ export async function appRoutes(app: FastifyInstance) {
       }
     })
 
-    return { possibleHabits }
+
+    const day = await prisma.day.findFirstOrThrow({
+      where: {
+        date: parseDate.toDate()
+      },
+
+      include: {
+        dayHabits: true
+      }
+    })
+
+    const completedHabits = day?.dayHabits.map((dayHabit) => {
+      return dayHabit
+    })
+
+    return { possibleHabits, completedHabits }
 
   })
 }
