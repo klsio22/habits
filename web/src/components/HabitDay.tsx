@@ -1,5 +1,28 @@
+import * as Popover from '@radix-ui/react-popover';
+import { ProgressBar } from './ProgressBar';
+
 export function HabitDay() {
   return (
-    <div className='w-10 h-10 bg-zinc-900 border border-zinc-800 rounded-lg'></div>
+    <Popover.Root>
+      <Popover.Trigger className='w-10 h-10 bg-zinc-900 border border-zinc-800 rounded-lg' />
+
+      <Popover.Portal>
+        <Popover.Content className='min-w-[320px] p-6 rounded-2xl bg-zinc-900 flex flex-col '>
+          <Popover.Arrow
+            height={8}
+            width={16}
+            className='fill-slate-900'
+          ></Popover.Arrow>
+
+          <span className='font-semibold text-zinc-400'>terça-feira</span>
+          <span className='mt-1 font-extrabold leading-tight text-3xl'>
+            17/01
+          </span>
+
+          <ProgressBar progress={25}/>
+
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   );
 }
