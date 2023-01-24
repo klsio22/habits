@@ -5,12 +5,12 @@ const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
 const summaryDates = generateDatesFromYearBeginning();
 
-const minimumSummaryDatesSize = 18 * 7;
+const minimumSummaryDatesSize = 18 * 10;
 const amountOfDaysToFill = minimumSummaryDatesSize - summaryDates.length;
 
 export default function SummaryTable() {
   return (
-    <div className='w-full flex'>
+    <div className='w-full flex overflow-x-auto scroll-m-1 scrollbar'>
       <div className='grid grid-rows-7 grid-flow-row gap-3'>
         {weekDays.map((weekDays, index) => {
           return (
@@ -24,7 +24,7 @@ export default function SummaryTable() {
         })}
       </div>
 
-      <div className='grid grid-rows-7 grid-flow-col gap-3'>
+      <div className='grid grid-rows-7 grid-flow-col gap-3 pb-4'>
         {summaryDates.map((date) => {
           return <HabitDay key={date.toString()} />;
         })}
