@@ -1,4 +1,5 @@
 import { View, Text, ScrollView } from 'react-native';
+import { BackButton } from '../components/BackButton';
 import { DAY_SIZE, HabitDay } from '../components/HabitDay';
 import { Header } from '../components/Header';
 
