@@ -1,11 +1,9 @@
-import { View, Text, ScrollView } from 'react-native';
-import { BackButton } from '../components/BackButton';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { DAY_SIZE, HabitDay } from '../components/HabitDay';
 import { Header } from '../components/Header';
-
 import { generateRangeDatesFromYearStart } from '../utils/generate-range-between-dates';
 
-const weeDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 const datesFromYearStart = generateRangeDatesFromYearStart();
 const minimumSummaryDatesSizes = 18 * 5;
 const amountOfDaysToFill = minimumSummaryDatesSizes - datesFromYearStart.length;
@@ -16,13 +14,13 @@ export function Home() {
       <Header />
 
       <View className='flex-row mt-6 mb-2'>
-        {weeDays.map((weeDays, i) => (
+        {weekDays.map((weekDays, i) => (
           <Text
-            key={`${weeDays}-${i}`}
+            key={`${weekDays}-${i}`}
             className='text-zinc-400 text-xl font-bold text-center mx-1'
             style={{ width: DAY_SIZE }}
           >
-            {weeDays}
+            {weekDays}
           </Text>
         ))}
       </View>
@@ -45,6 +43,8 @@ export function Home() {
               ></View>
             ))}
         </View>
+
+        
       </ScrollView>
     </View>
   );
