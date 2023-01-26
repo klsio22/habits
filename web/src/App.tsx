@@ -1,5 +1,6 @@
 import Header from './components/Header';
 import SummaryTable from './components/SummaryTable';
+import './lib/dayjs';
 
 export default function App() {
   return (

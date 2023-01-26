@@ -1,6 +1,7 @@
 import { Check } from 'phosphor-react';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { FormEvent, useState } from 'react';
+import { api } from '../lib/axios';
 
 const availableWeekDays = [
   'Domingo',
@@ -14,20 +15,37 @@ const availableWeekDays = [
 
 export function NewHabitForm() {
   const [title, setTitle] = useState('');
-  const [weedDays, setWeekDays] = useState<number[]>([]);
+  const [weekDays, setWeekDays] = useState<number[]>([]);
 
-  console.log('executou')
-
-  function createNewHabit(event: FormEvent) {
+  async function createNewHabit(event: FormEvent) {
     event.preventDefault();
-    console.log(title, weedDays);
+    console.log(title, weekDays);
+
+    if (!title || weekDays.length === 0) {
+      return;
+    }
+
+    await api
+      .post('/habits', {
+        title,
+        weekDays,
+      })
+      .then(() => {
+        setTitle('');
+        setWeekDays([]);
+        alert('habito criado com sucesso');
+      })
+      .catch((e) => {
+        console.log('error', e);
+      });
   }
+
   function handleToggleWeekday(weedDay: number) {
-    if (weedDays.includes(weedDay)) {
-      const weedDaysWithRemoveOne = weedDays.filter((day) => day !== weedDay);
+    if (weekDays.includes(weedDay)) {
+      const weedDaysWithRemoveOne = weekDays.filter((day) => day !== weedDay);
       setWeekDays(weedDaysWithRemoveOne);
     } else {
-      const weedDaysWithAddOne = [...weedDays, weedDay];
+      const weedDaysWithAddOne = [...weekDays, weedDay];
       setWeekDays(weedDaysWithAddOne);
     }
   }
@@ -44,6 +62,7 @@ export function NewHabitForm() {
         placeholder='ex.: Exercícios , dormir bem , etc ...'
         className=' p-4 rounded-lg mt-3 bg-zinc-800 text-white placeholder:text-zinc-400'
         autoFocus
+        value={title}
         onChange={(event) => setTitle(event.target.value)}
       />
 
@@ -57,6 +76,7 @@ export function NewHabitForm() {
             <Checkbox.Root
               key={weedDay}
               className='flex items-center gap-3 group'
+              checked={weekDays.includes(index)}
               onCheckedChange={() => {
                 handleToggleWeekday(index);
               }}
