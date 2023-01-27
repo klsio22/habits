@@ -4,8 +4,9 @@ import { Check } from 'phosphor-react';
 import { useEffect, useState } from 'react';
 import { api } from '../lib/axios';
 
-interface HabitsList {
+interface HabitsListProps {
   date: Date;
+  onCompletedChanged: (completed: number) => void;
 }
 interface HabitsInfo {
   possibleHabits: {
@@ -16,7 +17,7 @@ interface HabitsInfo {
   completedHabits: string[];
 }
 
-export function HabitsList({ date }: HabitsList) {
+export function HabitsList({ date, onCompletedChanged }: HabitsListProps) {
   const [habitsInfo, setHabitsInfo] = useState<HabitsInfo>();
 
   useEffect(() => {
@@ -32,10 +33,10 @@ export function HabitsList({ date }: HabitsList) {
   }, []);
 
   async function handleToggle(habitId: string) {
+    await api.patch(`/habits/${habitId}/toggle`);
+
     const isHabitAlreadyCompleted =
       habitsInfo!.completedHabits.includes(habitId);
-
-    await api.patch(`/habits/${habitId}/toggle`);
 
     let completedHabits: string[] = [];
 
@@ -49,6 +50,8 @@ export function HabitsList({ date }: HabitsList) {
       possibleHabits: habitsInfo!.possibleHabits,
       completedHabits,
     });
+
+    onCompletedChanged(completedHabits.length);
   }
 
   const isDateInPost = dayjs(date).endOf('day').isBefore(new Date());
