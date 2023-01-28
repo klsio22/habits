@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ScrollView, View, Text, Alert } from 'react-native';
 import { BackButton } from '../components/BackButton';
 import { Checkbox } from '../components/Checkbox';
+import { HabitsEmpty } from '../components/HabitsEmpty';
 import { Loading } from '../components/Loading';
 import { ProgressBar } from '../components/ProgressBar';
 import { api } from '../lib/axios';
@@ -49,9 +50,8 @@ export function Habit() {
       const response = await api.get('/day', { params: { date } });
       setDayInfo(response?.data);
       setCompletedHabits(response?.data.completedHabits ?? []);
-      console.log('foi');
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       Alert.alert(
         'Ops',
         'Não foi possível carregar as informações dos hábitos.'
@@ -100,7 +100,7 @@ export function Habit() {
         <ProgressBar progress={habitProgress} />
 
         <View className='mt-6 '>
-          {dayInfo?.possibleHabits &&
+          {dayInfo?.possibleHabits ? (
             dayInfo?.possibleHabits.map((habit) => (
               <Checkbox
                 key={habit.id}
@@ -108,7 +108,10 @@ export function Habit() {
                 checked={completedHabits.includes(habit.id)}
                 onPress={() => handleToggleHabits(habit.id)}
               />
-            ))}
+            ))
+          ) : (
+            <HabitsEmpty />
+          )}
         </View>
       </ScrollView>
     </View>
