@@ -29,7 +29,7 @@ export default function SummaryTable() {
   }, []);
 
   return (
-    <div className='w-full flex overflow-x-auto scroll-m-1 scrollbar'>
+    <div className='w-full flex overflow-x-auto scroll-m-1 scrollbar py-3'>
       <div className='grid grid-rows-7 grid-flow-row gap-3'>
         {weekDays.map((weekDays, index) => {
           return (
@@ -43,7 +43,7 @@ export default function SummaryTable() {
         })}
       </div>
 
-      <div className='grid grid-rows-7 grid-flow-col gap-3 pb-4'>
+      <div className='grid grid-rows-7 grid-flow-col gap-3'>
         {summary.length > 0 &&
           summaryDates.map((date) => {
             const dayInSummary = summary.find((day) => {
