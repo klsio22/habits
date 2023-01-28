@@ -46,9 +46,7 @@ export function Home() {
     }, [])
   );
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
   return (
     <View className='flex-1 bg-background px-8 pt-14'>
@@ -82,7 +80,7 @@ export function Home() {
                   key={date.toISOString()}
                   date={date}
                   amountOfHabits={dayWithHabits?.amount}
-                  amountCompleted = {dayWithHabits?.completed}
+                  amountCompleted={dayWithHabits?.completed}
                   onPress={() =>
                     navigate('habit', { date: date.toDateString() })
                   }
