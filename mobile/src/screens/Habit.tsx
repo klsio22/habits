@@ -1,7 +1,7 @@
-import { useRoute } from '@react-navigation/native';
+import { useFocusEffect, useRoute } from '@react-navigation/native';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ScrollView, View, Text, Alert } from 'react-native';
 import { BackButton } from '../components/BackButton';
 import { Checkbox } from '../components/Checkbox';
@@ -72,13 +72,20 @@ export function Habit() {
           )
         : setCompletedHabits((prevState) => [...prevState, habitId]);
     } catch (error) {
-    } finally {
+      console.log(error);
+      Alert.alert('Ops', 'Não foi possível atualizar o status do habito');
     }
   }
 
-  useEffect(() => {
+  /*   useEffect(() => {
     fetchHabits();
-  }, []);
+  }, []); */
+  
+  useFocusEffect(
+    useCallback(() => {
+      fetchHabits();
+    }, [])
+  );
 
   if (loading) return <Loading />;
 
