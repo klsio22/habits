@@ -21,7 +21,6 @@ const availableWeekDays = [
   'Quinta-feira',
   'Sexta-feira',
   'Sábado',
-  'Domingo',
 ];
 
 export function New() {
@@ -42,7 +41,7 @@ export function New() {
         return Alert.alert('Novo habito', 'Informe o nome do hábito');
       }
 
-      await api.post('/habits', { title, weekDays });
+      await api.post('habits', { title, weekDays });
 
       setTitle('');
       setWeekDays([]);
