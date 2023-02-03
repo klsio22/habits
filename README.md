@@ -39,7 +39,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-✈️ O objetivo desse projeto foi fazer uma aplicação fullstack em que desenvolvemos o mobile usando react-native , web usando react com o vite , e o back-end com fastify que se assemelha o express para fazer as comunicações de rotas.
+✈️ O objetivo desse projeto foi fazer uma aplicação fullstack em que desenvolvemos o mobile usando react-native , web usando react com o vite , e o back-end com fastify que se assemelha o express que é um framework Node.js para construção de aplicações web rápidas e eficientes
 
 🔗 Link do projeto online na vercel [plataforma do evento](https://nlw-ignite-lab-event-platform.vercel.app/)
 
