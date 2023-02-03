@@ -54,11 +54,26 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 ##  📜 Como executar
 
 > Obs.: Nesse projeto temos autenticação via OAuth com o GitHub
-> 
+
+
+#### inicializa o servidor  
+
+- Antes de inicializar o servidor é preciso inicializar o prisma com `npx prisma generate` após gerar os dados do prisma rode o  `yarn dev`
+
 #### No Front-end siga os seguintes passos :
 
 - Instale as dependências com `yarn ou npm install`;
+  
 - Inicie o servidor com `yarn dev ou npm run dev`;
+  
+- Entre na pasta web e execute com `yarn dev` para executar o projeto na versão web
+  
+#### No Mobile siga as instruções:
+- Instale as dependências com `yarn ou npm install`;
+
+- Para executar o projeto ter o expo instalado e configurado na máquina caso não tenha tem um tutorial na RocketSeat como instalar e configurar o expo https://react-native.rocketseat.dev/
+
+- Uma vez que tenha o expo execute o servidor `yarn dev` e depois execute o expo `npx expo start`
 
 A aplicação pode ser acessada em [`localhost:3000`](http://localhost:3000) no front-end.
 
