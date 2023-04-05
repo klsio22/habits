@@ -80,7 +80,7 @@ export function Habit() {
   /*   useEffect(() => {
     fetchHabits();
   }, []); */
-  
+
   useFocusEffect(
     useCallback(() => {
       fetchHabits();
